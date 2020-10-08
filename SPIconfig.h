@@ -1,0 +1,8 @@
+#ifndef SPICONFIG_H
+#define SPICONFIG_H
+
+#define SPI_CHANNEL 0
+#define SPI_BAUDRATE 1000000
+#define SPI_CONFIG 0X00000100
+
+#endif // SPICONFIG_H
