@@ -45,8 +45,78 @@ void MainWindow::data_init()
 {
     average_sample_temps    = 0;
     last_average_sample     = 0;
-    set_point_temp          = 0;
+    set_point_temp          = 100;
     control_state           = FALSE;
+    ui->label_TempSet->setText("100");
+    ui->lcdnumber_SetPoint_temp->display(set_point_temp);
+}
+
+void MainWindow::cfg_Gpios_Coms()
+{
+    /// GPIO /// Spi Config /// Serial open ///
+    if (gpioInitialise() < 0)
+    {
+        gpioTerminate();
+        qDebug("Error GPIO not initialize");
+    }
+    // OUTPUTS
+    gpioSetMode(2,PI_OUTPUT); // Indicador listo para vaciado
+    gpioSetMode(3,PI_OUTPUT); // Indicador resistencia encendida
+    gpioSetMode(27,PI_OUTPUT); // Encendido bomba
+    gpioSetMode(22,PI_OUTPUT); // Encendido resistencia
+    gpioSetMode(10,PI_OUTPUT); // Valvula vaciado
+    // INPUTS
+    gpioSetMode(9,PI_INPUT); // paro emergencia
+
+    gpioWrite(LED_RESISTOR, LED_RESISTOR_OFF);  // Indicador resistencia
+    gpioWrite(LED_VACCUM,   LED_VACCUM_OFF);  // Indicador de vacio apagado
+    gpioWrite(RESISTOR,     RESISTOR_OFF); // Resistencia apagada
+    gpioWrite(BOMB,         BOMB_OFF); // Bomba apagada
+    gpioWrite(VACCUM,       VACCUM_OFF); // Valvula de vaciado
+
+    for(int i=0;i<3; i++)
+    {
+        if (( h[i]=spiOpen(i,SPI_BAUDRATE,SPI_CONFIG) ) < 0)
+        {
+            gpioTerminate();
+            qDebug()<< "ERROR SPI CH" << i+1 <<" no  open";
+//            if( i==0 ){  } // TODO Show in UI if Sensor state is OK
+//            if( i==1 ){  }
+//            if( i==2 ){  }
+        }
+        else
+        {
+            qDebug()<< "SPI CH" << i+1 << "opened";
+//            if( i==0 ){  } // TODO Show in UI if Sensor state is OK
+//            if( i==1 ){  }
+//            if( i==2 ){  }
+        }
+
+    }
+
+    if ((fe=serOpen((char*)"/dev/ttyAMA0",9600,(unsigned)0)) < 0)
+    {
+        gpioTerminate();
+        qDebug("ERROR Serial not open");
+    }
+    else
+    {
+        qDebug("Serial Opened");
+    }
+}
+
+void MainWindow::cfg_Timers()
+{
+    /// Tiempo de muestreo temperatura
+    timerT = new QTimer(this);
+    connect(timerT,SIGNAL(timeout()),this,SLOT(readTemp()));
+
+    timer = new QTimer(this);
+    connect(timer,SIGNAL(timeout()),this,SLOT(clockfunc()));
+
+    //// Frequency operation protection timer
+    releTime = new QTimer(this);
+    connect(timerT,SIGNAL(timeout()),this,SLOT(releTimefunc()));
 }
 
 void MainWindow::readTemp()
@@ -99,8 +169,8 @@ void MainWindow::readTemp()
             rele_timeout = TRUE;
             releTime->start(2000);
         }
-    last_average_sample = average_sample_temps;
-    last_dir_change = dir_change;
+//    last_average_sample = average_sample_temps;
+//    last_dir_change = dir_change;
     }
     else
     {
@@ -111,7 +181,7 @@ void MainWindow::readTemp()
 
 void MainWindow::clockfunc()
 {
-
+    // TODO Checar si se ocupa
 }
 
 void MainWindow::releTimefunc()
@@ -121,73 +191,6 @@ void MainWindow::releTimefunc()
     releTime->stop();
 }
 
-void MainWindow::cfg_Gpios_Coms()
-{
-    /// GPIO /// Spi Config /// Serial open ///
-    if (gpioInitialise() < 0)
-    {
-        gpioTerminate();
-        qDebug("Error GPIO not initialize");
-    }
-    // OUTPUTS
-    gpioSetMode(2,PI_OUTPUT); // Indicador listo para vaciado
-    gpioSetMode(3,PI_OUTPUT); // Indicador resistencia encendida
-    gpioSetMode(27,PI_OUTPUT); // Encendido bomba
-    gpioSetMode(22,PI_OUTPUT); // Encendido resistencia
-    gpioSetMode(10,PI_OUTPUT); // Valvula vaciado
-    // INPUTS
-    gpioSetMode(9,PI_INPUT); // paro emergencia
-
-    gpioWrite(LED_RESISTOR, LED_RESISTOR_OFF);  // Indicador resistencia
-    gpioWrite(LED_VACCUM,   LED_VACCUM_OFF);  // Indicador de vacio apagado
-    gpioWrite(RESISTOR,     RESISTOR_OFF); // Resistencia apagada
-    gpioWrite(BOMB,         BOMB_OFF); // Bomba apagada
-    gpioWrite(VACCUM,       VACCUM_OFF); // Valvula de vaciado
-
-    for(int i=0;i<3; i++)
-    {
-        if (( h[i]=spiOpen(i,SPI_BAUDRATE,SPI_CONFIG) ) < 0)
-        {
-            gpioTerminate();
-            qDebug()<< "ERROR SPI CH" << i+1 <<" no  open";
-            if( i==0 ){ ui->radio_termopar1->setChecked(FALSE); }
-            if( i==1 ){ ui->radio_termopar_2->setChecked(FALSE); }
-            if( i==2 ){ ui->radio_termopar_3->setChecked(FALSE); }
-        }
-        else
-        {
-            qDebug()<< "SPI CH" << i+1 << "opened";
-            if( i==0 ){ ui->radio_termopar1->setChecked(TRUE); }
-            if( i==1 ){ ui->radio_termopar_2->setChecked(TRUE); }
-            if( i==2 ){ ui->radio_termopar_3->setChecked(TRUE); }
-        }
-
-    }
-
-    if ((fe=serOpen((char*)"/dev/ttyAMA0",9600,(unsigned)0)) < 0)
-    {
-        gpioTerminate();
-        qDebug("ERROR Serial not open");
-    }
-    else
-    {
-        qDebug("Serial Opened");
-    }
-}
-
-void MainWindow::cfg_Timers()
-{
-    /// Tiempo de muestreo temperatura
-    timerT = new QTimer(this);
-    connect(timerT,SIGNAL(timeout()),this,SLOT(readTemp()));
-
-    timer = new QTimer(this);
-    connect(timer,SIGNAL(timeout()),this,SLOT(clockfunc()));
-
-    //// Frequency operation protection timer
-    releTime = new QTimer(this);
-    connect(timerT,SIGNAL(timeout()),this,SLOT(releTimefunc()));
-}
 
 void MainWindow::on_pushButton_on_clicked()
 {
@@ -195,29 +198,9 @@ void MainWindow::on_pushButton_on_clicked()
     gpioWrite(RESISTOR, RESISTOR_ON); // Resistencia encendida
     rele_timeout = FALSE;
     control_state = TRUE;
-    // Get set point of temperature in Automatic or Manual Mode
-//    if(ui->tabWidget->currentIndex() == 0) // Manual Mode
-//    {
-        set_point_temp = ui->spinBox_manual_temp->value();
 
-//    }
-//    else if(ui->tabWidget->currentIndex() == 1) // Automatic mode
-//    {
-//        switch (ui->comboBox_auto_material->currentIndex()) {
-//        case 0:
-//            set_point_temp = 100;  // Acrilico
-//            break;
-//        case 1:
-//            set_point_temp = 150;  // PET
-//            break;
-//        case 2:
-//            set_point_temp = 200;  // Termoplastico
-//            break;
-//        default:
-//            break;
-//        }
+    set_point_temp = ui->label_TempSet->text().toFloat();
 
-//    }
     ui->lcdnumber_SetPoint_temp->setDecMode();
     ui->lcdnumber_SetPoint_temp->setDigitCount(4);
     ui->lcdnumber_SetPoint_temp->display(set_point_temp);
@@ -229,15 +212,24 @@ void MainWindow::on_pushButton_on_clicked()
 
 }
 
-void MainWindow::on_pushButton_vacuum_clicked()
+void MainWindow::on_pushButton_vacuum_clicked(bool checked)
 {
-    gpioWrite(VACCUM,VACCUM_ON); // Valvula de vaciado
+    if(checked)
+    {
+        gpioWrite(VACCUM,VACCUM_ON); // Valvula de vaciado
+    }
+    else
+    {
+        gpioWrite(VACCUM,VACCUM_OFF); // Valvula de vaciado
+    }
     //TODO Implementar timer para apagar en determinado tiempo
 //    gpioWrite(LED_RESISTOR, LED_RESISTOR_ON);  // Indicador resistencia
 //    gpioWrite(LED_VACCUM,   LED_VACCUM_ON);  // Indicador de vacio apagado
 //    gpioWrite(RESISTOR,     RESISTOR_ON); // Resistencia apagada
 //    gpioWrite(BOMB,         BOMB_ON); // Bomba apagada
 }
+
+
 
 void MainWindow::on_pushButton_Stop_clicked()
 {
@@ -250,4 +242,93 @@ void MainWindow::on_pushButton_Stop_clicked()
 //    gpioWrite(RESISTOR,     RESISTOR_OFF); // Resistencia apagada
 //    gpioWrite(BOMB,         BOMB_OFF); // Bomba apagada
 //    gpioWrite(VACCUM,       VACCUM_OFF); // Valvula de vaciado
+}
+
+void MainWindow::on_pushButton_TouchScreen_clicked(bool checked)
+{
+    ui->pushButton_TouchScreen->setStyleSheet("background-color: rgb(47, 255, 0);");
+    ui->pushButton_Physical->setStyleSheet("background-color: rgb(255, 255, 255);");
+    ui->pushButton_TouchScreen->setChecked(true);
+    ui->pushButton_Physical->setChecked(false);
+    ui->frameMaterial->setEnabled(true);
+    ui->frame_SetTemp->setEnabled(true);
+    ui->pushButton_on->setEnabled(true);
+    ui->pushButton_preHeat->setEnabled(true);
+    ui->pushButton_Stop->setEnabled(true);
+    ui->pushButton_vacuum->setEnabled(true);
+}
+
+void MainWindow::on_pushButton_Physical_clicked(bool checked)
+{
+    ui->pushButton_TouchScreen->setStyleSheet("background-color: rgb(255, 255, 255);");
+    ui->pushButton_Physical->setStyleSheet("background-color: rgb(47, 255, 0);");
+    ui->pushButton_TouchScreen->setChecked(false);
+    ui->pushButton_Physical->setChecked(true);
+    ui->frameMaterial->setEnabled(false);
+    ui->frame_SetTemp->setEnabled(false);
+    ui->pushButton_on->setEnabled(false);
+    ui->pushButton_preHeat->setEnabled(false);
+    ui->pushButton_Stop->setEnabled(false);
+    ui->pushButton_vacuum->setEnabled(false);
+}
+
+void MainWindow::on_pushButtonByMaterial_clicked(bool checked)
+{
+    ui->pushButtonByMaterial->setStyleSheet("background-color: rgb(47, 255, 0);");
+    ui->pushButton_SetTemp->setStyleSheet("background-color: rgb(255, 255, 255);");
+    ui->pushButtonByMaterial->setChecked(true);
+    ui->pushButton_SetTemp->setChecked(false);
+    ui->pushButton_DOWN->setEnabled(false);
+    ui->pushButton_UP->setEnabled(false);
+    ui->comboBox_auto_material->setEnabled(true);
+}
+
+void MainWindow::on_pushButton_SetTemp_clicked(bool checked)
+{
+    ui->pushButtonByMaterial->setStyleSheet("background-color: rgb(255, 255, 255);");
+    ui->pushButton_SetTemp->setStyleSheet("background-color: rgb(47, 255, 0);");
+    ui->pushButtonByMaterial->setChecked(false);
+    ui->pushButton_SetTemp->setChecked(true);
+    ui->pushButton_DOWN->setEnabled(true);
+    ui->pushButton_UP->setEnabled(true);
+    ui->comboBox_auto_material->setEnabled(false);
+}
+
+void MainWindow::on_pushButton_UP_clicked()
+{
+    if(set_point_temp < 350)
+    {
+        set_point_temp += 5;
+        ui->lcdnumber_SetPoint_temp->display(set_point_temp);
+        ui->label_TempSet->setText(QString::number(set_point_temp));
+    }
+}
+
+void MainWindow::on_pushButton_DOWN_clicked()
+{
+    if(set_point_temp > 50)
+    {
+        set_point_temp -= 5;
+        ui->lcdnumber_SetPoint_temp->display(set_point_temp);
+        ui->label_TempSet->setText(QString::number(set_point_temp));
+    }
+
+}
+
+void MainWindow::on_comboBox_auto_material_currentIndexChanged(int index)
+{
+    switch (ui->comboBox_auto_material->currentIndex()) {
+    case 0:
+        set_point_temp = 100;  // Acrilico
+        break;
+    case 1:
+        set_point_temp = 150;  // PET
+        break;
+    case 2:
+        set_point_temp = 200;  // Termoplastico
+        break;
+    default:
+        break;
+    }
+    ui->lcdnumber_SetPoint_temp->display(set_point_temp);
 }

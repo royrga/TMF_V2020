@@ -66,7 +66,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>70</y>
+      <y>60</y>
       <width>251</width>
       <height>21</height>
      </rect>
@@ -89,8 +89,8 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>580</x>
-      <y>70</y>
+      <x>530</x>
+      <y>60</y>
       <width>71</width>
       <height>21</height>
      </rect>
@@ -114,8 +114,8 @@
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>70</y>
-      <width>311</width>
+      <y>60</y>
+      <width>211</width>
       <height>20</height>
      </rect>
     </property>
@@ -135,9 +135,9 @@
    <widget class="Line" name="line_2">
     <property name="geometry">
      <rect>
-      <x>650</x>
-      <y>70</y>
-      <width>331</width>
+      <x>600</x>
+      <y>60</y>
+      <width>371</width>
       <height>20</height>
      </rect>
     </property>
@@ -160,8 +160,8 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>570</x>
-      <y>400</y>
+      <x>80</x>
+      <y>380</y>
       <width>71</width>
       <height>71</height>
      </rect>
@@ -196,8 +196,8 @@
    <widget class="QPushButton" name="pushButton_vacuum">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>400</y>
+      <x>210</x>
+      <y>380</y>
       <width>71</width>
       <height>71</height>
      </rect>
@@ -226,8 +226,8 @@
    <widget class="QPushButton" name="pushButton_preHeat">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>300</y>
+      <x>430</x>
+      <y>250</y>
       <width>71</width>
       <height>71</height>
      </rect>
@@ -258,8 +258,8 @@
    <widget class="QPushButton" name="pushButton_Stop">
     <property name="geometry">
      <rect>
-      <x>830</x>
-      <y>400</y>
+      <x>340</x>
+      <y>380</y>
       <width>81</width>
       <height>81</height>
      </rect>
@@ -287,8 +287,8 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>340</y>
+      <x>10</x>
+      <y>280</y>
       <width>61</width>
       <height>21</height>
      </rect>
@@ -311,9 +311,9 @@
    <widget class="Line" name="line_3">
     <property name="geometry">
      <rect>
-      <x>600</x>
-      <y>340</y>
-      <width>361</width>
+      <x>90</x>
+      <y>280</y>
+      <width>371</width>
       <height>20</height>
      </rect>
     </property>
@@ -330,50 +330,29 @@
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QProgressBar" name="progressBar">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>210</y>
-      <width>21</width>
-      <height>151</height>
-     </rect>
-    </property>
-    <property name="value">
-     <number>24</number>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Vertical</enum>
-    </property>
-   </widget>
    <widget class="QLCDNumber" name="lcd_resistance_temp">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>10</x>
       <y>140</y>
-      <width>121</width>
-      <height>61</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLCDNumber" name="lcdNumber_2">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>450</y>
-      <width>64</width>
-      <height>23</height>
+      <width>221</width>
+      <height>91</height>
      </rect>
     </property>
    </widget>
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>120</y>
-      <width>121</width>
-      <height>16</height>
+      <x>70</x>
+      <y>110</y>
+      <width>161</width>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
     </property>
     <property name="frameShape">
      <enum>QFrame::NoFrame</enum>
@@ -391,39 +370,19 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="label_6">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>430</y>
-      <width>91</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::NoFrame</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Plain</enum>
-    </property>
-    <property name="lineWidth">
-     <number>0</number>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pressure&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="scaledContents">
-     <bool>false</bool>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>210</y>
-      <width>81</width>
-      <height>16</height>
+      <x>310</x>
+      <y>110</y>
+      <width>121</width>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
     </property>
     <property name="frameShape">
      <enum>QFrame::NoFrame</enum>
@@ -445,156 +404,40 @@
     <property name="geometry">
      <rect>
       <x>250</x>
-      <y>230</y>
-      <width>121</width>
-      <height>51</height>
+      <y>140</y>
+      <width>221</width>
+      <height>91</height>
      </rect>
     </property>
    </widget>
-   <widget class="Line" name="line_5">
-    <property name="geometry">
-     <rect>
-      <x>210</x>
-      <y>390</y>
-      <width>241</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(22, 59, 180);</string>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Plain</enum>
-    </property>
-    <property name="lineWidth">
-     <number>3</number>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_10">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>390</y>
-      <width>191</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Droid Arabic Naskh</family>
-      <pointsize>14</pointsize>
-      <weight>50</weight>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(22, 59, 180);</string>
-    </property>
-    <property name="text">
-     <string>VACUUM CONTROL</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="radio_termopar1">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>160</y>
-      <width>21</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="checkable">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="radio_termopar_2">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>160</y>
-      <width>21</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="checkable">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="radio_termopar_3">
-    <property name="geometry">
-     <rect>
-      <x>170</x>
-      <y>160</y>
-      <width>21</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="checkable">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_11">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>130</y>
-      <width>91</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::NoFrame</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Plain</enum>
-    </property>
-    <property name="lineWidth">
-     <number>0</number>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Termocouples&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="scaledContents">
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QFrame" name="frame">
+   <widget class="QFrame" name="frameMaterial">
     <property name="enabled">
      <bool>true</bool>
     </property>
     <property name="geometry">
      <rect>
-      <x>560</x>
-      <y>100</y>
-      <width>361</width>
-      <height>131</height>
+      <x>520</x>
+      <y>90</y>
+      <width>191</width>
+      <height>211</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
     </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
+    <property name="lineWidth">
+     <number>14</number>
     </property>
     <widget class="QComboBox" name="comboBox_auto_material">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>40</y>
-       <width>131</width>
-       <height>51</height>
+       <x>10</x>
+       <y>50</y>
+       <width>161</width>
+       <height>61</height>
       </rect>
      </property>
      <property name="font">
@@ -626,88 +469,272 @@
       </property>
      </item>
     </widget>
-    <widget class="QSpinBox" name="spinBox_manual_temp">
+    <widget class="QLabel" name="label_8">
      <property name="geometry">
       <rect>
-       <x>200</x>
-       <y>40</y>
-       <width>131</width>
-       <height>41</height>
+       <x>50</x>
+       <y>10</y>
+       <width>101</width>
+       <height>31</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <pointsize>22</pointsize>
-       <strikeout>false</strikeout>
-       <kerning>true</kerning>
+       <pointsize>16</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+       <underline>true</underline>
       </font>
-     </property>
-     <property name="wrapping">
-      <bool>false</bool>
-     </property>
-     <property name="frame">
-      <bool>true</bool>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-     <property name="readOnly">
-      <bool>false</bool>
-     </property>
-     <property name="buttonSymbols">
-      <enum>QAbstractSpinBox::PlusMinus</enum>
-     </property>
-     <property name="minimum">
-      <number>50</number>
-     </property>
-     <property name="maximum">
-      <number>280</number>
-     </property>
-     <property name="singleStep">
-      <number>5</number>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_8">
-     <property name="geometry">
-      <rect>
-       <x>70</x>
-       <y>20</y>
-       <width>59</width>
-       <height>14</height>
-      </rect>
      </property>
      <property name="text">
       <string>Material</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_9">
-     <property name="geometry">
-      <rect>
-       <x>220</x>
-       <y>10</y>
-       <width>81</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Temperature</string>
-     </property>
-    </widget>
-    <widget class="QRadioButton" name="radioButton">
+    <widget class="QPushButton" name="pushButtonByMaterial">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>100</y>
-       <width>121</width>
-       <height>20</height>
+       <y>120</y>
+       <width>161</width>
+       <height>81</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(47, 255, 0);</string>
+     </property>
      <property name="text">
-      <string>Semi-Automatic</string>
+      <string>Set Temp By Material</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
-   <zorder>frame</zorder>
+   <widget class="QFrame" name="frame_ControlMode">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>310</y>
+      <width>461</width>
+      <height>181</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>0</y>
+       <width>231</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+       <underline>true</underline>
+      </font>
+     </property>
+     <property name="text">
+      <string>Select Control Mode</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_TouchScreen">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>211</width>
+       <height>131</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(47, 255, 0);</string>
+     </property>
+     <property name="text">
+      <string>Touch Screen</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_Physical">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>40</y>
+       <width>211</width>
+       <height>131</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Physical Switches</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="frame_SetTemp">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>90</y>
+      <width>261</width>
+      <height>211</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <widget class="QPushButton" name="pushButton_SetTemp">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>120</y>
+       <width>151</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Set Temperatue</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>171</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+       <underline>true</underline>
+      </font>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Temperature &lt;span style=&quot; vertical-align:super;&quot;&gt;o&lt;/span&gt;C&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_TempSet">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>60</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>20</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_UP">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>30</y>
+       <width>75</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>UP</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_DOWN">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>120</y>
+       <width>75</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>DOWN</string>
+     </property>
+    </widget>
+   </widget>
+   <zorder>frameMaterial</zorder>
    <zorder>label</zorder>
    <zorder>label_2</zorder>
    <zorder>label_3</zorder>
@@ -719,19 +746,12 @@
    <zorder>pushButton_Stop</zorder>
    <zorder>label_4</zorder>
    <zorder>line_3</zorder>
-   <zorder>progressBar</zorder>
    <zorder>lcd_resistance_temp</zorder>
    <zorder>label_5</zorder>
-   <zorder>label_6</zorder>
-   <zorder>lcdNumber_2</zorder>
    <zorder>label_7</zorder>
    <zorder>lcdnumber_SetPoint_temp</zorder>
-   <zorder>line_5</zorder>
-   <zorder>label_10</zorder>
-   <zorder>radio_termopar1</zorder>
-   <zorder>radio_termopar_2</zorder>
-   <zorder>radio_termopar_3</zorder>
-   <zorder>label_11</zorder>
+   <zorder>frame_ControlMode</zorder>
+   <zorder>frame_SetTemp</zorder>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
