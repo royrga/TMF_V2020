@@ -24,17 +24,7 @@ private slots:
 
     void on_pushButton_on_clicked();
 
-    void on_pushButton_vacuum_clicked();
-
     void on_pushButton_Stop_clicked();
-
-    void on_pushButton_TouchScreen_clicked(bool checked);
-
-    void on_pushButton_Physical_clicked(bool checked);
-
-    void on_pushButtonByMaterial_clicked(bool checked);
-
-    void on_pushButton_SetTemp_clicked(bool checked);
 
     void on_pushButton_UP_clicked();
 
@@ -43,6 +33,14 @@ private slots:
     void on_comboBox_auto_material_currentIndexChanged(int index);
 
     void on_pushButton_vacuum_clicked(bool checked);
+
+    void on_pushButtonByMaterial_clicked();
+
+    void on_pushButton_SetTemp_clicked();
+
+    void on_pushButton_TouchScreen_clicked();
+
+    void on_pushButton_Physical_clicked();
 
 private:
     Ui::MainWindow *ui;

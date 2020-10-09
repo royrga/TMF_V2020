@@ -156,16 +156,18 @@ void MainWindow::readTemp()
 
     if(control_state) // ON/OFF Control Logic
     {
-        if((average_sample_temps >= set_point_temp) && (!rele_timeout))
+        if((sample_temp[0] >= set_point_temp) && (!rele_timeout))
         {
             //ui->pushButton_preHeat->setEnabled(false);
             gpioWrite(RESISTOR, RESISTOR_OFF); // Resistencia apagada
+            gpioWrite(LED_RESISTOR, LED_RESISTOR_OFF);  // Indicador resistencia
             rele_timeout = TRUE;
             releTime->start(2000);
         }
-        else if((average_sample_temps < set_point_temp) && (!rele_timeout))  //TODO Buscar manera de usar menos releTime
+        else if((sample_temp[0] < set_point_temp) && (!rele_timeout))  //TODO Buscar manera de usar menos releTime
         {
             gpioWrite(RESISTOR, RESISTOR_ON); // Resistencia encendida
+            gpioWrite(LED_RESISTOR, LED_RESISTOR_ON);  // Indicador resistencia
             rele_timeout = TRUE;
             releTime->start(2000);
         }
@@ -175,6 +177,7 @@ void MainWindow::readTemp()
     else
     {
         //Control OFF
+        gpioWrite(LED_RESISTOR, LED_RESISTOR_OFF);  // Indicador resistencia
         gpioWrite(RESISTOR, RESISTOR_OFF); // Resistencia apagada
     }
 }
@@ -196,6 +199,7 @@ void MainWindow::on_pushButton_on_clicked()
 {
 
     gpioWrite(RESISTOR, RESISTOR_ON); // Resistencia encendida
+    gpioWrite(LED_RESISTOR, LED_RESISTOR_ON);  // Indicador resistencia
     rele_timeout = FALSE;
     control_state = TRUE;
 
@@ -217,10 +221,13 @@ void MainWindow::on_pushButton_vacuum_clicked(bool checked)
     if(checked)
     {
         gpioWrite(VACCUM,VACCUM_ON); // Valvula de vaciado
+        gpioWrite(LED_VACCUM,   LED_VACCUM_ON);  // Indicador de vacio apagado
+
     }
     else
     {
         gpioWrite(VACCUM,VACCUM_OFF); // Valvula de vaciado
+        gpioWrite(LED_VACCUM,   LED_VACCUM_OFF);  // Indicador de vacio apagado
     }
     //TODO Implementar timer para apagar en determinado tiempo
 //    gpioWrite(LED_RESISTOR, LED_RESISTOR_ON);  // Indicador resistencia
@@ -237,14 +244,13 @@ void MainWindow::on_pushButton_Stop_clicked()
     //ui->tabWidget->setEnabled(true);
     ui->pushButton_on->setEnabled(true);
     ui->pushButton_preHeat->setEnabled(true);
-//    gpioWrite(LED_RESISTOR, LED_RESISTOR_OFF);  // Indicador resistencia
-//    gpioWrite(LED_VACCUM,   LED_VACCUM_OFF);  // Indicador de vacio apagado
-//    gpioWrite(RESISTOR,     RESISTOR_OFF); // Resistencia apagada
+    gpioWrite(LED_RESISTOR, LED_RESISTOR_OFF);  // Indicador resistencia
+    gpioWrite(RESISTOR,     RESISTOR_OFF); // Resistencia apagada
 //    gpioWrite(BOMB,         BOMB_OFF); // Bomba apagada
 //    gpioWrite(VACCUM,       VACCUM_OFF); // Valvula de vaciado
 }
 
-void MainWindow::on_pushButton_TouchScreen_clicked(bool checked)
+void MainWindow::on_pushButton_TouchScreen_clicked()
 {
     ui->pushButton_TouchScreen->setStyleSheet("background-color: rgb(47, 255, 0);");
     ui->pushButton_Physical->setStyleSheet("background-color: rgb(255, 255, 255);");
@@ -258,7 +264,7 @@ void MainWindow::on_pushButton_TouchScreen_clicked(bool checked)
     ui->pushButton_vacuum->setEnabled(true);
 }
 
-void MainWindow::on_pushButton_Physical_clicked(bool checked)
+void MainWindow::on_pushButton_Physical_clicked()
 {
     ui->pushButton_TouchScreen->setStyleSheet("background-color: rgb(255, 255, 255);");
     ui->pushButton_Physical->setStyleSheet("background-color: rgb(47, 255, 0);");
@@ -272,7 +278,7 @@ void MainWindow::on_pushButton_Physical_clicked(bool checked)
     ui->pushButton_vacuum->setEnabled(false);
 }
 
-void MainWindow::on_pushButtonByMaterial_clicked(bool checked)
+void MainWindow::on_pushButtonByMaterial_clicked()
 {
     ui->pushButtonByMaterial->setStyleSheet("background-color: rgb(47, 255, 0);");
     ui->pushButton_SetTemp->setStyleSheet("background-color: rgb(255, 255, 255);");
@@ -283,7 +289,7 @@ void MainWindow::on_pushButtonByMaterial_clicked(bool checked)
     ui->comboBox_auto_material->setEnabled(true);
 }
 
-void MainWindow::on_pushButton_SetTemp_clicked(bool checked)
+void MainWindow::on_pushButton_SetTemp_clicked()
 {
     ui->pushButtonByMaterial->setStyleSheet("background-color: rgb(255, 255, 255);");
     ui->pushButton_SetTemp->setStyleSheet("background-color: rgb(47, 255, 0);");
@@ -317,7 +323,7 @@ void MainWindow::on_pushButton_DOWN_clicked()
 
 void MainWindow::on_comboBox_auto_material_currentIndexChanged(int index)
 {
-    switch (ui->comboBox_auto_material->currentIndex()) {
+    switch (index) {
     case 0:
         set_point_temp = 100;  // Acrilico
         break;
